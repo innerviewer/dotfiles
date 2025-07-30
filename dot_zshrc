@@ -1,0 +1,98 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+STEAM_FORCE_DESKTOP_UI_SCALING=1.5
+
+# For the ssh-agent
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+
+plugins=(
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+)
+
+#(eval ssh-agent -s)
+#eval $(keychain --eval --noask)
+
+#bindkey "^[[1;5C" forward-word
+#bindkey "^[[1;5D" backward-word
+
+bindkey    "^[[7~"        beginning-of-line
+bindkey "^[[8~"        end-of-line
+bindkey    "\e[2~"        overwrite-mode
+bindkey    "\e[3~"        delete-char
+bindkey "^[Od"        backward-word                 # rxvt
+bindkey    "\e[1;5D"    backward-word
+bindkey "^[Oc"        forward-word                # rxvt
+bindkey    "\e[1;5C"    forward-word
+bindkey "^[[A"         history-search-backward
+bindkey "^[[B"        history-search-forward
+bindkey    "\e[5~"        history-beginning-search-backward
+bindkey    "\e[6~"        history-beginning-search-forward
+bindkey    "^W"        backward-delete-word
+
+ZSH_THEME="powerlevel10k/powerlevel10k"
+source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
+
+source ~/.bashrc
+source ~/.tokensrc
+
+#(wal -i /home/nrv/Documents/repos/custo/tiago-calliari-anyone.jpg)
+#(wal -R)
+#(cat ~/.cache/wal/sequences &)
+
+alias cmconf="cmake -G "Ninja" ./../ -DCMAKE_BUILD_TYPE=Debug"
+alias cmbuild="cmake --build . -j 10"
+alias pullsub="git pull -r --autostash && git submodule update --init --recursive"
+alias pullsh="git pull -r --autostash && git push"
+alias cdrep="cd /home/nrv/Documents/repos"
+alias sre="cd /home/nrv/Documents/repos/SREngine"
+alias srcvenv="source venv/bin/activate"
+alias serv="ssh -tt nervy@217.151.231.215"
+alias monserv="nervy@217.151.231.215"
+
+alias ls='lsd'
+alias l='ls -l'
+alias la='ls -a'
+alias lla='ls -la'
+alias lt='ls --tree'
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+CLICOLOR=1
+
+export PATH="/home/nrv/zig-compilers:$PATH"
+
+# Created by `pipx` on 2025-01-01 02:44:03
+export PATH="$PATH:/home/nrv/.local/bin"
+
+export PATH="$PATH:/home/nrv/.config/emacs/bin"
+
+# Aliases: git
+alias ga='git add'
+alias gap='ga --patch'
+alias gb='git branch'
+alias gba='gb --all'
+alias gc='git commit'
+alias gca='gc --amend --no-edit'
+alias gce='gc --amend'
+alias gco='git checkout'
+alias gcl='git clone --recursive'
+alias gd='git diff --output-indicator-new=" " --output-indicator-old=" "'
+alias gds='gd --staged'
+alias gi='git init'
+alias gl='git log --graph --all ^origin/gh-pages --pretty=format:"%C(magenta)%h %C(white) %an  %ar%C(blue)  %D%n%s%n"'
+alias gm='git merge'
+alias gn='git checkout -b'  # new branch
+alias gp='git push'
+alias gr='git reset'
+alias gs='git status --short'
+alias gu='git pull & git submodule update --init --recursive'
+
+
+alias sudo='doas'
