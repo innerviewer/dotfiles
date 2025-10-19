@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+KEYFILE="$HOME/.config/inner/private-gpg-key.asc"
+KEYID="161D8249EA98E2A69F6DFFB154AAF16921261D0F"  
+
+if [ ! -f "$KEYFILE" ]; then
+  echo "GPG exported key not present at $KEYFILE — nothing to import."
+  exit 0
+fi
+
+# Import the secret key
+gpg --import "$KEYFILE"
+
+git config --global user.signingkey "$KEYID"
+git config --global commit.gpgsign true
+git config --global tag.gpgSign true
+
+shred -u "$KEYFILE" || rm -f "$KEYFILE"
+
+echo "GPG key imported and git configured."

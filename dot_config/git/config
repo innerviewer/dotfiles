@@ -1,0 +1,18 @@
+[pull]
+	rebase = true
+[init]
+	defaultBranch = master
+[user]
+	name = innerviewer
+	email = innerviewerr@gmail.com
+	signingkey = 54AAF16921261D0F
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[commit]
+	gpgsign = true
+[tag]
+	gpgSign = true
