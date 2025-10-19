@@ -7,8 +7,6 @@ source ~/.local/share/omarchy/default/bash/rc
 # Make an alias for invoking commands you use constantly
 # alias p='python'
 
-export BW_SESSION=$(bw login {{- .email }} --raw)
-
 eval "$(thefuck --alias)"
 alias cdrep='cd ~/repos/'
 alias vimdiff='nvim -d'

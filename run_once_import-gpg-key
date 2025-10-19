@@ -6,6 +6,8 @@ KEYID="161D8249EA98E2A69F6DFFB154AAF16921261D0F"
 
 echo "🔐 Importing GPG key from Bitwarden..."
 
+BW_SESSION=$(bw unlock --raw)
+
 # Ensure Bitwarden CLI is unlocked
 if ! bw status | grep -q '"unlocked"'; then
   echo "❌ Bitwarden is locked. Please run: bw unlock"
@@ -32,7 +34,6 @@ echo -e "trust\n5\ny\nquit" | gpg --command-fd 0 --edit-key "$KEYID" trust
 echo "✅ GPG key trusted (level 5)."
 
 # Configure git signing
-git config --global user.signingkey "$KEYID"
 git config --global commit.gpgsign true
 git config --global tag.gpgSign true
 
