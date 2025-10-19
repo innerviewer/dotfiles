@@ -1,0 +1,21 @@
+{{- $use_secrets := promptBoolOnce . "use_secrets" "Use secrets from Bitwarden? (true/false)" -}}
+{{- $personal_computer := promptBoolOnce . "personal_computer" "Is this a personal computer for daily driving? (true/false)" -}}
+{{- $dev_computer := promptBoolOnce . "dev_computer" "Do you do development on this computer? (true/false)" -}}
+{{- $laptop := promptBoolOnce . "laptop" "Is this a laptop? (true/false)" -}}
+{{- $email := promptStringOnce . "email" "Email address" -}}
+
+[data]
+    dev_computer      = {{ $dev_computer }}
+    email             = {{ $email | quote }}
+    github_user       = "innerviewer"
+    personal_computer = {{ $personal_computer }}
+    use_secrets       = {{ $use_secrets }}
+    laptop            = {{ $laptop }}
+    xdgCacheDir       = "{{ .chezmoi.homeDir }}/.cache"
+    xdgConfigDir      = "{{ .chezmoi.homeDir }}/.config"
+    xdgDataDir        = "{{ .chezmoi.homeDir }}/.local/share"
+    xdgStateDir       = "{{ .chezmoi.homeDir }}/.local/state"
+
+[merge]
+    command = "nvim"
+    args = ["-d", "{{ .Destination }}", "{{ .Source }}", "{{ .Target }}"]
