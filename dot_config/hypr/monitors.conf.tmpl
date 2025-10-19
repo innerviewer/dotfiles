@@ -7,7 +7,7 @@
 #env = GDK_SCALE,2
 #monitor=,preferred,auto,auto
 
-{{ if and .chezmoi.dev_computer (not .chezmoi.laptop) }}
+{{ if and .dev_computer (not .laptop) }}
     env = GDK_SCALE,1.75
     monitor=HDMI-A-1,3840x2160@60,1920x0,1.666667
     monitor=DP-1,1920x1080@165,0x0,1
