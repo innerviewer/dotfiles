@@ -6,7 +6,7 @@ KEYID="161D8249EA98E2A69F6DFFB154AAF16921261D0F"
 
 echo "🔐 Importing GPG key from Bitwarden..."
 
-BW_SESSION=$(bw unlock --raw)
+export BW_SESSION=$(bw unlock --raw)
 
 # Ensure Bitwarden CLI is unlocked
 if ! bw status | grep -q '"unlocked"'; then
