@@ -5,7 +5,7 @@
 [user]
 	name = innerviewer
 	email = innerviewerr@gmail.com
-	signingkey = 54AAF16921261D0F
+	signingkey = E085BE884590FBB8
 [credential "https://github.com"]
 	helper = 
 	helper = !/usr/bin/gh auth git-credential
