@@ -1,21 +1,41 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-KEYFILE="$HOME/.config/inner/private-gpg-key.asc"
-KEYID="161D8249EA98E2A69F6DFFB154AAF16921261D0F"  
+BW_ITEM_ID="a7297cba-6866-41d9-8f7f-b37b00909156"
+KEYID="161D8249EA98E2A69F6DFFB154AAF16921261D0F"
 
-if [ ! -f "$KEYFILE" ]; then
-  echo "GPG exported key not present at $KEYFILE — nothing to import."
-  exit 0
+echo "🔐 Importing GPG key from Bitwarden..."
+
+# Ensure Bitwarden CLI is unlocked
+if ! bw status | grep -q '"unlocked"'; then
+  echo "❌ Bitwarden is locked. Please run: bw unlock"
+  exit 1
 fi
 
-# Import the secret key
-gpg --import "$KEYFILE"
+# Retrieve the key content (notes field)
+GPG_KEY_CONTENT=$(bw get notes "$BW_ITEM_ID")
 
+if [ -z "$GPG_KEY_CONTENT" ]; then
+  echo "❌ Failed to retrieve GPG key from Bitwarden."
+  exit 1
+fi
+
+# Check if key already exists
+if gpg --list-secret-keys "$KEYID" >/dev/null 2>&1; then
+  echo "✅ GPG key for $KEYID already exists. Skipping import."
+else
+  echo "$GPG_KEY_CONTENT" | gpg --import
+  echo "✅ GPG key imported."
+fi
+
+echo -e "trust\n5\ny\nquit" | gpg --command-fd 0 --edit-key "$KEYID" trust
+echo "✅ GPG key trusted (level 5)."
+
+# Configure git signing
 git config --global user.signingkey "$KEYID"
 git config --global commit.gpgsign true
 git config --global tag.gpgSign true
 
-shred -u "$KEYFILE" || rm -f "$KEYFILE"
+echo "✅ Git configured for GPG signing."
+echo "🎉 All done!"
 
-echo "GPG key imported and git configured."
