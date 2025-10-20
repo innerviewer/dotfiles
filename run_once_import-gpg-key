@@ -4,7 +4,10 @@ set -euo pipefail
 BW_ITEM_ID="772ca4cd-9eac-48da-8a90-b37b00a8b744"
 KEYID="66E3AC6A71C8CC76FBF5ACF2E085BE884590FBB8"
 
-echo "🔐 Importing GPG key from Bitwarden..."
+read -p "🔐 Import the GPG key from Bitwarden? (y/N): " confirm
+[[ ${confirm,,} == "y" ]] || exit 1
+
+echo "🔐 Importing GPG key from Bitwarden...: "
 
 export BW_SESSION=$(bw unlock --raw)
 
@@ -21,6 +24,8 @@ if [ -z "$GPG_KEY_CONTENT" ]; then
   echo "❌ Failed to retrieve GPG key from Bitwarden."
   exit 1
 fi
+
+echo "✅ Retrieved GPG key from Bitwarden."
 
 # Check if key already exists
 if gpg --list-secret-keys "$KEYID" >/dev/null 2>&1; then
