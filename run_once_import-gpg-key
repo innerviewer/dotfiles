@@ -5,7 +5,7 @@ BW_ITEM_ID="772ca4cd-9eac-48da-8a90-b37b00a8b744"
 KEYID="66E3AC6A71C8CC76FBF5ACF2E085BE884590FBB8"
 
 read -p "🔐 Import the GPG key from Bitwarden? (y/N): " confirm
-[[ ${confirm,,} == "y" ]] || exit 1
+[[ ${confirm,,} == "y" ]] || exit 0
 
 echo "🔐 Importing GPG key from Bitwarden...: "
 

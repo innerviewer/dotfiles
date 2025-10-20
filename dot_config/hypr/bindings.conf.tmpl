@@ -46,6 +46,7 @@ bindd = SUPER SHIFT, 8, Move to workspace 8, movetoworkspacesilent, 8
 bindd = SUPER SHIFT, 9, Move to workspace 9, movetoworkspacesilent, 9
 bindd = SUPER SHIFT, 0, Move to workspace 10, movetoworkspacesilent, 10
 
+{{ if and .dev_computer (not .laptop) }}
 # ALT + [1-9,0,-,=] → Switch to workspace 11-21 on DP-1
 bindd = ALT, 1, Switch to workspace 11, workspace, 11
 bindd = ALT, 2, Switch to workspace 12, workspace, 12
@@ -68,6 +69,7 @@ bindd = ALT SHIFT, 7, Move to workspace 17, movetoworkspacesilent, 17
 bindd = ALT SHIFT, 8, Move to workspace 18, movetoworkspacesilent, 18
 bindd = ALT SHIFT, 9, Move to workspace 19, movetoworkspacesilent, 19
 bindd = ALT SHIFT, 0, Move to workspace 20, movetoworkspacesilent, 20
+{{ end }}
 
 unbind = SUPER, SPACE
 bindd = SUPER, SPACE, Omarchy menu, exec, omarchy-menu
