@@ -35,3 +35,10 @@ alias gr='git reset'
 alias gs='git status --short'
 alias gu='git pull & git submodule update --init --recursive'
 
+# pnpm
+export PNPM_HOME="/home/nrv/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
