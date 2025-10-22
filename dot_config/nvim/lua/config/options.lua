@@ -8,3 +8,5 @@ vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 
 vim.opt.rtp:append("/usr/share/vim/vimfiles")
+
+vim.opt.spelllang = { "en_us", "fr", "ru_ru" }
