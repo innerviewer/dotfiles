@@ -96,3 +96,37 @@ bindd = SUPER, F, Full width, fullscreen, 1
 #bindd = SUPER, Q, Close active window, killactive,
 
 bindd = SUPER SHIFT, S, Screenshot, exec, omarchy-cmd-screenshot smart clipboard
+
+unbind = SUPER, H
+unbind = SUPER, J
+unbind = SUPER, K
+unbind = SUPER, L
+
+unbind = SUPER SHIFT, H
+unbind = SUPER SHIFT, J
+unbind = SUPER SHIFT, K
+unbind = SUPER SHIFT, L
+
+# bindd = SUPER, H, Focus left, left
+# bindd = SUPER, J, Focus bottom, bottom
+# bindd = SUPER, K, Focus top, top
+# bindd = SUPER, L, Focus right, right
+#
+# bindd = SUPER SHIFT, H
+# bindd = SUPER SHIFT, J
+# bindd = SUPER SHIFT, K
+# bindd = SUPER SHIFT, L
+
+bind = SUPER CONTROL, K, exec, ~/.local/share/omarchy/bin/omarchy-menu-keybindings
+
+bind = SUPER, S, togglesplit
+
+bind = SUPER, H, movefocus, l
+bind = SUPER, J, movefocus, d
+bind = SUPER, K, movefocus, u
+bind = SUPER, L, movefocus, r
+
+bind = SUPER SHIFT, H, swapwindow, l
+bind = SUPER SHIFT, J, swapwindow, d
+bind = SUPER SHIFT, K, swapwindow, u
+bind = SUPER SHIFT, L, swapwindow, r

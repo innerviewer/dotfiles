@@ -25,6 +25,7 @@ return {
           { "<leader>ccs", "<cmd>CMakeSelectBuildType<cr>", desc = "CMake Select Build Type" },
           { "<leader>cct", "<cmd>CMakeSelectBuildTarget<cr>", desc = "CMake Select Target" },
           { "<leader>ccm", "<cmd>CMakeShowBuildMenu<cr>", desc = "CMake Show Build Menu" },
+          { "gs", "<cmd>LspClangdSwitchSourceHeader<cr>", desc = "Jump between Source/Header." },
         },
       },
     },
