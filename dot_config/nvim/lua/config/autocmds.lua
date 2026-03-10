@@ -16,3 +16,10 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.b.autoformat = false
   end,
 })
+
+vim.api.nvim_create_autocmd("VimEnter", {
+  once = true,
+  callback = function()
+    require("config.cmake_tools_project").setup_cmake_tools_keymaps()
+  end,
+})
