@@ -1,0 +1,3 @@
+return {
+  "rcasia/neotest-java",
+}

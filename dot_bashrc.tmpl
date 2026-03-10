@@ -11,13 +11,25 @@ source ~/.local/share/omarchy/default/bash/rc
 # alias p='python'
 
 gl() {
-  exclude_branch=
-  if git rev-parse --verify origin/gh-pages >/dev/null 2>&1; then
-    exclude_branch="^origin/gh-pages"
-  fi
+    exclude_branch=
+    if git rev-parse --verify origin/gh-pages >/dev/null 2>&1; then
+        exclude_branch="^origin/gh-pages"
+    fi
 
-  git log --graph --all $exclude_branch \
-    --pretty=format:"%C(magenta)%h %C(white)%an  %ar%C(blue)  %D%n%s%n"
+    git log --graph --all $exclude_branch \
+        --pretty=format:"%C(magenta)%h %C(white)%an  %ar%C(blue)  %D%n%s%n"
+}
+
+run_c() {
+    if [ -z "$1" ]; then
+        echo "Usage: run_c <fichier.c>"
+        return 1
+    fi
+
+    local src="$1"
+    local bin="${src%.c}"
+
+    gcc "$src" -o "$bin" && "./$bin"
 }
 
 eval "$(thefuck --alias)"
@@ -27,6 +39,7 @@ alias pullsub="git pull -r --autostash && git submodule update --init --recursiv
 alias pullsh="git pull -r --autostash && git push"
 alias cdrep="cd ~/repos"
 alias srcvenv="source .venv/bin/activate"
+alias crvenv="python -m venv .venv"
 
 alias ga='git add'
 alias gap='ga --patch'
@@ -42,7 +55,7 @@ alias gds='gd --staged'
 alias gi='git init'
 alias gl='gl'
 alias gm='git merge'
-alias gn='git checkout -b'  # new branch
+alias gn='git checkout -b' # new branch
 alias gp='git push'
 alias gr='git reset'
 alias gs='git status --short'
@@ -51,8 +64,8 @@ alias gu='git pull & git submodule update --init --recursive'
 # pnpm
 export PNPM_HOME="/home/nrv/.local/share/pnpm"
 case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
+*":$PNPM_HOME:"*) ;;
+*) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
 
