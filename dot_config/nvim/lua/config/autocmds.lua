@@ -23,3 +23,12 @@ vim.api.nvim_create_autocmd("VimEnter", {
     require("config.cmake_tools_project").setup_cmake_tools_keymaps()
   end,
 })
+
+-- Disable autocomment
+vim.api.nvim_create_autocmd("BufEnter", {
+  desc = "Disable autocomment.",
+  group = vim.api.nvim_create_augroup("maconfig-disable-autocomment", { clear = true }),
+  callback = function()
+    vim.opt.formatoptions:remove({ "c", "r", "o" })
+  end,
+})
