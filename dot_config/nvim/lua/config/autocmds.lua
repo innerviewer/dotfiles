@@ -10,12 +10,12 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "c", "cpp", "h", "hpp", "cmake" },
-  callback = function()
-    vim.b.autoformat = false
-  end,
-})
+-- vim.api.nvim_create_autocmd("FileType", {
+--   pattern = { "c", "cpp", "h", "hpp", "cmake" },
+--   callback = function()
+--     vim.b.autoformat = false
+--   end,
+-- })
 
 vim.api.nvim_create_autocmd("VimEnter", {
   once = true,
