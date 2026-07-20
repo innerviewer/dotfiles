@@ -4,34 +4,21 @@ return {
     config = function()
       local dap = require("dap")
 
+      vim.keymap.set("n", "<leader>dx", function()
+        require("dapui").close()
+        require("dap").terminate()
+      end, { desc = "Close debug UI & terminate session" })
+
       -- CodeLLDB adapter (required by cmake-tools.nvim :CMakeDebug)
-      -- nvim-dap expects this adapter to be a server it can connect to.
       dap.adapters.codelldb = {
         type = "server",
         port = "${port}",
         host = "127.0.0.1",
         executable = {
-          command = "codelldb", -- ensure this is in PATH
+          command = "codelldb",
           args = { "--port", "${port}" },
         },
       }
-
-      dap.configurations.cpp = {
-        {
-          name = "Launch file",
-          type = "codelldb",
-          request = "launch",
-          program = function()
-            return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
-          end,
-          cwd = "${workspaceFolder}",
-          stopOnEntry = false,
-          args = {},
-        },
-      }
-
-      -- Use same config for C
-      dap.configurations.c = dap.configurations.cpp
     end,
   },
 

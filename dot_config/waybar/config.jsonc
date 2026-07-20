@@ -6,6 +6,7 @@
   "height": 26,
   "modules-left": ["custom/omarchy", "hyprland/workspaces"],
   "modules-center": [
+    "hyprland/submap",
     "clock",
     "custom/update",
     "custom/screenrecording-indicator",
@@ -31,6 +32,12 @@
     "on-click": "omarchy-launch-or-focus-tui btop",
     "interval": 1,
     "tooltip-format": "CPU Temperature: {temperatureC}°C",
+  },
+  "hyprland/submap": {
+    "format": "{}",
+    "max-length": 30,
+    "tooltip": false,
+    "on-click": "hyprctl dispatch submap reset",
   },
   "hyprland/workspaces": {
     "on-click": "activate",
@@ -173,13 +180,13 @@
     "on-click": "omarchy-toggle-idle",
     "exec": "$OMARCHY_PATH/default/waybar/indicators/idle.sh",
     "signal": 9,
-    "return-type": "json"
+    "return-type": "json",
   },
   "custom/notification-silencing-indicator": {
     "on-click": "omarchy-toggle-notification-silencing",
     "exec": "$OMARCHY_PATH/default/waybar/indicators/notification-silencing.sh",
     "signal": 10,
-    "return-type": "json"
+    "return-type": "json",
   },
   "tray": {
     "icon-size": 12,

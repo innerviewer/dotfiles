@@ -15,11 +15,13 @@ return {
       },
       setup = {
         clangd = function(_, opts)
+          opts.cmd = { "clangd", "-j=" .. tostring(vim.uv.available_parallelism()) }
           local ok, cmake = pcall(require, "cmake-tools")
           if ok then
             local build_dir = cmake.get_build_directory()
             if build_dir then
               opts.cmd = { "clangd", "--compile-commands-dir=" .. tostring(build_dir) }
+              table.insert(opts.cmd, "--compile-commands-dir=" .. tostring(build_dir))
             end
 
             -- Restart LSP when cmake build directory changes
