@@ -12,6 +12,13 @@ return {
             { "gs", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Jump between Source/Header." },
           },
         },
+        gopls = {
+          keys = {
+            { "<leader>ccb", "<cmd>GoBuild<cr>", desc = "Go Build" },
+            { "<leader>ccr", "<cmd>GoRun<cr>", desc = "Go Run" },
+            { "<leader>ccd", "<cmd>GoDebug<cr>", desc = "Go Debug" },
+          },
+        },
       },
       setup = {
         clangd = function(_, opts)
