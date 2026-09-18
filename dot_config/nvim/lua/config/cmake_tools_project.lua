@@ -49,6 +49,10 @@ function M.setup_cmake_tools_keymaps()
   map("n", "<leader>ccs", load_and("CMakeSelectBuildType"), { desc = "CMake Select Build Type" })
   map("n", "<leader>cct", load_and("CMakeSelectBuildTarget"), { desc = "CMake Select Target" })
   map("n", "<leader>ccm", load_and("CMakeShowBuildMenu"), { desc = "CMake Show Build Menu" })
+  map("n", "<leader>ccl", function()
+    load()
+    vim.cmd("copen")
+  end, { desc = "CMake Logs (quickfix)" })
 end
 
 return M

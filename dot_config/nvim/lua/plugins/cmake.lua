@@ -11,13 +11,22 @@ return {
     cmake_kits_path = "~/.config/nvim/cmake-kits.json",
     cmake_build_args = { "-j 16" },
 
-    -- cmake-tools defaults to `runInTerminal = true`, which can result in the program
+    -- cmake-tools defaults to `runInTerminal = true`, which results in the program
     -- running outside the debugger (no threads/stack frames to control).
     cmake_dap_configuration = {
       type = "codelldb",
       request = "launch",
+      stopOnEntry = true,
       runInTerminal = false,
       console = "internalConsole",
+      initCommands = {},
+    },
+
+    cmake_executor = {
+      name = "quickfix",
+      opts = {
+        auto_close_when_success = false,
+      },
     },
   },
 

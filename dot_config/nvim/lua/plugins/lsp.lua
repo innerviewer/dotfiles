@@ -12,13 +12,6 @@ return {
             { "gs", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Jump between Source/Header." },
           },
         },
-        gopls = {
-          keys = {
-            { "<leader>ccb", "<cmd>GoBuild<cr>", desc = "Go Build" },
-            { "<leader>ccr", "<cmd>GoRun<cr>", desc = "Go Run" },
-            { "<leader>ccd", "<cmd>GoDebug<cr>", desc = "Go Debug" },
-          },
-        },
       },
       setup = {
         clangd = function(_, opts)
@@ -27,7 +20,6 @@ return {
           if ok then
             local build_dir = cmake.get_build_directory()
             if build_dir then
-              opts.cmd = { "clangd", "--compile-commands-dir=" .. tostring(build_dir) }
               table.insert(opts.cmd, "--compile-commands-dir=" .. tostring(build_dir))
             end
 
@@ -66,20 +58,4 @@ return {
   --     end
   --   end,
   -- },
-
-  -- Enable formatting for C/C++ using clang-format
-  {
-    "stevearc/conform.nvim",
-    opts = {
-      formatters_by_ft = {
-        c = { "clang-format" },
-        cpp = { "clang-format" },
-      },
-      formatters = {
-        ["clang-format"] = {
-          prepend_args = { "--style=file:" .. vim.fn.expand("~/.config/nvim/.clang-format") },
-        },
-      },
-    },
-  },
 }
