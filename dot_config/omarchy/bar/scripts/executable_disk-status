@@ -1,0 +1,5 @@
+#!/bin/bash
+free_space=$(df -h / | awk 'NR==2 {print $4}')
+total_space=$(df -h / | awk 'NR==2 {print $2}')
+use_pct=$(df -h / | awk 'NR==2 {print $5}')
+echo "{\"text\":\"󰋊 $free_space\",\"tooltip\":\"Disk (/): $free_space free of $total_space (Used: $use_pct)\",\"class\":\"disk\"}"

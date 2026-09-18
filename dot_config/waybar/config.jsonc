@@ -21,6 +21,7 @@
     "memory",
     "disk",
     "battery",
+    "hyprland/language",
   ],
   "memory": {
     "interval": 1,
@@ -72,6 +73,12 @@
     "format": "/ : {free}",
     "path": "/",
   },
+  "hyprland/language": {
+    "format": "{} ",
+    "format-en": "en",
+    "format-fr": "fr",
+    "format-ru": "ru",
+  },
   "custom/omarchy": {
     "format": "<span font='omarchy'>\ue900</span>",
     "on-click": "omarchy-menu",
@@ -103,7 +110,7 @@
     "return-type": "json",
     "interval": 60,
     "tooltip": false,
-    "on-click": "notify-send -u low \"$(omarchy-weather-status)\""
+    "on-click": "notify-send -u low \"$(omarchy-weather-status)\"",
   },
   "network": {
     "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],

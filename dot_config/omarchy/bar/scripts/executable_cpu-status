@@ -1,0 +1,15 @@
+#!/bin/bash
+read -r cpu a b c idle rest < /proc/stat
+prev_total=$((a + b + c + idle))
+prev_idle=$idle
+sleep 0.2
+read -r cpu a b c idle rest < /proc/stat
+total=$((a + b + c + idle))
+diff_total=$((total - prev_total))
+diff_idle=$((idle - prev_idle))
+if (( diff_total > 0 )); then
+  usage=$(( (1000 * (diff_total - diff_idle) / diff_total + 5) / 10 ))
+else
+  usage=0
+fi
+echo "{\"text\":\"󰻠 $usage%\",\"tooltip\":\"CPU Load: $usage%\",\"class\":\"cpu\"}"

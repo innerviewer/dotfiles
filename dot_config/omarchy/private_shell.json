@@ -1,0 +1,94 @@
+{
+  "bar": {
+    "centerAnchor": "omarchy.clock",
+    "layout": {
+      "center": [
+        {
+          "id": "omarchy.indicators"
+        },
+        {
+          "format": "dddd HH:mm",
+          "formatAlt": "d MMMM 'W'ww yyyy",
+          "id": "omarchy.clock",
+          "verticalFormat": "HH\n—\nmm"
+        },
+        {
+          "id": "omarchy.keyboard-layout"
+        },
+        {
+          "id": "omarchy.weather"
+        },
+        {
+          "id": "omarchy.system-update"
+        }
+      ],
+      "left": [
+        {
+          "id": "omarchy.menu"
+        },
+        {
+          "id": "omarchy.workspaces"
+        }
+      ],
+      "right": [
+        {
+          "id": "omarchy.tray"
+        },
+        {
+          "id": "omarchy.agents"
+        },
+        {
+          "id": "omarchy.bluetooth"
+        },
+        {
+          "id": "omarchy.network"
+        },
+        {
+          "id": "omarchy.audio"
+        },
+        {
+          "id": "cpu",
+          "type": "command",
+          "exec": "$HOME/.config/omarchy/bar/scripts/cpu-status",
+          "interval": 2,
+          "onClick": "omarchy-launch-or-focus-tui btop"
+        },
+        {
+          "id": "temp",
+          "type": "command",
+          "exec": "$HOME/.config/omarchy/bar/scripts/temp-status",
+          "interval": 2,
+          "onClick": "omarchy-launch-or-focus-tui btop"
+        },
+        {
+          "id": "ram",
+          "type": "command",
+          "exec": "$HOME/.config/omarchy/bar/scripts/ram-status",
+          "interval": 2,
+          "onClick": "omarchy-launch-or-focus-tui btop"
+        },
+        {
+          "id": "disk",
+          "type": "command",
+          "exec": "$HOME/.config/omarchy/bar/scripts/disk-status",
+          "interval": 15,
+          "onClick": "omarchy-launch-or-focus-tui btop"
+        },
+        {
+          "id": "omarchy.monitor"
+        },
+        {
+          "id": "omarchy.power"
+        }
+      ]
+    },
+    "position": "top",
+    "transparent": true
+  },
+  "idle": {
+    "lock": 300,
+    "screensaver": 150
+  },
+  "plugins": [],
+  "version": 1
+}

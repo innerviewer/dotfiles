@@ -1,0 +1,9 @@
+#!/bin/bash
+hwmon="/sys/class/hwmon/hwmon3/temp1_input"
+if [[ -f $hwmon ]]; then
+  temp_raw=$(cat "$hwmon" 2>/dev/null || echo 0)
+  temp_c=$(( temp_raw / 1000 ))
+  echo "{\"text\":\" ${temp_c}°C\",\"tooltip\":\"CPU Temp: ${temp_c}°C\",\"class\":\"temperature\"}"
+else
+  echo "{\"text\":\" N/A\",\"tooltip\":\"Temperature sensor unavailable\",\"class\":\"temperature\"}"
+fi
