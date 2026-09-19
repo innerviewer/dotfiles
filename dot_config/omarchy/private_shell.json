@@ -7,10 +7,11 @@
           "id": "omarchy.indicators"
         },
         {
-          "format": "yyyy-MM-dd HH:mm",
+          "format": "yyyy-MM-dd HH:mm:ss",
           "formatAlt": "d MMMM 'W'ww yyyy",
-          "id": "omarchy.clock",
-          "verticalFormat": "HH\n—\nmm"
+          "id": "nrv.clock",
+          "verticalFormat": "HH\n—\nmm",
+          "interval": 1
         },
         {
           "id": "omarchy.keyboard-layout"
@@ -24,10 +25,10 @@
       ],
       "left": [
         {
-          "id": "omarchy.menu"
+          "id": "nrv.menu"
         },
         {
-          "id": "omarchy.workspaces"
+          "id": "nrv.workspaces"
         }
       ],
       "right": [
@@ -89,6 +90,16 @@
     "lock": 300,
     "screensaver": 150
   },
-  "plugins": [],
-  "version": 1
+  "plugins": [
+    {
+      "id": "nrv.menu"
+    }
+  ],
+  "version": 1,
+  "disabledPlugins": [
+    "omarchy.menu"
+  ],
+  "cloneSourceRestores": [
+    "nrv.menu"
+  ]
 }

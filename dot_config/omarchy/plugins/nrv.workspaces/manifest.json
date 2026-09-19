@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "nrv.workspaces",
+  "name": "My Workspaces",
+  "version": "1.0.0",
+  "author": "Omarchy",
+  "description": "Workspace number indicators",
+  "kinds": [
+    "bar-widget"
+  ],
+  "entryPoints": {
+    "barWidget": "Workspaces.qml"
+  },
+  "barWidget": {
+    "displayName": "My Workspaces",
+    "description": "Workspace number indicators",
+    "allowMultiple": false,
+    "defaults": {
+      "relativeNumbers": false
+    },
+    "schema": [
+      {
+        "key": "relativeNumbers",
+        "type": "boolean",
+        "label": "Relative workspace numbers",
+        "description": "Display numbers relative to monitor (1-10) instead of absolute workspace IDs (11-20)"
+      }
+    ]
+  },
+  "omarchy": {
+    "clonedFrom": "omarchy.workspaces"
+  }
+}

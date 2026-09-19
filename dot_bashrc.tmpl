@@ -3,7 +3,16 @@
 
 # All the default Omarchy aliases and functions
 # (don't mess with these directly, just overwrite them here!)
-source ~/.local/share/omarchy/default/bash/rc
+# /etc/omarchy.conf is written by omarchy-dev-link. When absent, force the
+# package default instead of preserving a stale inherited dev-link value before
+# we decide which rc file to source.
+if [[ -f /etc/omarchy.conf ]]; then
+  source /etc/omarchy.conf
+  export OMARCHY_PATH="${OMARCHY_PATH:-/usr/share/omarchy}"
+else
+  export OMARCHY_PATH=/usr/share/omarchy
+fi
+source "$OMARCHY_PATH/default/bash/rc"
 
 # Add your own exports, aliases, and functions here.
 #
@@ -32,7 +41,12 @@ run_c() {
     gcc "$src" -o "$bin" && "./$bin"
 }
 
-eval "$(thefuck --alias)"
+# Lazy-load thefuck (saves ~130ms on shell startup)
+fuck() {
+    unset -f fuck
+    eval "$(thefuck --alias)"
+    fuck "$@"
+}
 alias cdrep='cd ~/repos/'
 alias vimdiff='nvim -d'
 alias pullsub="git pull -r --autostash && git submodule update --init --recursive"
@@ -70,9 +84,26 @@ case ":$PATH:" in
 esac
 # pnpm end
 
-# pyenv
+# pyenv (lazy-loaded to save ~65ms on shell startup)
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init - bash)"
+
+_pyenv_init() {
+    unset -f python python3 pyenv
+    eval "$(pyenv init - bash)"
+}
+python() {
+    _pyenv_init
+    python "$@"
+}
+python3() {
+    _pyenv_init
+    python3 "$@"
+}
+pyenv() {
+    _pyenv_init
+    pyenv "$@"
+}
 
 export PATH="$HOME/.cargo/bin:$PATH"
+. "$HOME/.rokit/env"
