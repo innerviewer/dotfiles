@@ -74,30 +74,18 @@ o.bind("SUPER + SHIFT + J", "Swap down", hl.dsp.window.swap({ direction = "d" })
 o.bind("SUPER + SHIFT + K", "Swap up", hl.dsp.window.swap({ direction = "u" }))
 o.bind("SUPER + SHIFT + L", "Swap right", hl.dsp.window.swap({ direction = "r" }))
 
--- Debounce helper to prevent Hyprland upstream bug where releasing Shift before the number key
--- erroneously triggers the keypress binding (focus workspace) on key release.
-local ignore_focus_ws = nil
+-- Zoom bindings
+hl.unbind("SUPER + Z")
+hl.unbind("SUPER + CTRL + Z")
+hl.unbind("SUPER + CTRL + ALT + Z")
 
-local function move_workspace_silent(ws)
-	return function()
-		ignore_focus_ws = tostring(ws)
-		hl.dispatch(hl.dsp.window.move({ workspace = tostring(ws), follow = false }))
-		hl.timer(function()
-			if ignore_focus_ws == tostring(ws) then
-				ignore_focus_ws = nil
-			end
-		end, { timeout = 400, type = "oneshot" })
-	end
-end
-
-local function switch_to_workspace(ws)
-	return function()
-		if ignore_focus_ws == tostring(ws) then
-			return
-		end
-		hl.dispatch(hl.dsp.focus({ workspace = tostring(ws) }))
-	end
-end
+o.bind("SUPER + Z", "Zoom in", function()
+	local zoom = hl.get_config("cursor.zoom_factor") or 1
+	hl.config({ cursor = { zoom_factor = zoom + 1 } })
+end)
+o.bind("SUPER + CTRL + Z", "Reset zoom", function()
+	hl.config({ cursor = { zoom_factor = 1 } })
+end)
 
 -- Workspaces 1-10 on HDMI-A-1
 for i = 1, 10 do
@@ -108,8 +96,12 @@ for i = 1, 10 do
 	hl.unbind("SUPER + " .. num)
 	hl.unbind("SUPER + SHIFT + " .. num)
 
-	o.bind("SUPER + " .. key, "Switch to workspace " .. i, switch_to_workspace(i))
-	o.bind("SUPER + SHIFT + " .. key, "Move to workspace " .. i, move_workspace_silent(i))
+	o.bind("SUPER + " .. key, "Switch to workspace " .. i, hl.dsp.focus({ workspace = tostring(i), release = false }))
+	o.bind(
+		"SUPER + SHIFT + " .. key,
+		"Move to workspace " .. i,
+		(hl.dsp.window.move({ workspace = tostring(i), follow = false, release = false }))
+	)
 end
 
 -- Workspaces 11-20 on DP-1
@@ -122,8 +114,12 @@ for i = 1, 10 do
 	hl.unbind("ALT + " .. num)
 	hl.unbind("ALT + SHIFT + " .. num)
 
-	o.bind("ALT + " .. key, "Switch to workspace " .. ws, switch_to_workspace(ws))
-	o.bind("ALT + SHIFT + " .. key, "Move to workspace " .. ws, move_workspace_silent(ws))
+	o.bind("ALT + " .. key, "Switch to workspace " .. ws, hl.dsp.focus({ workspace = tostring(ws), release = false }))
+	o.bind(
+		"ALT + SHIFT + " .. key,
+		"Move to workspace " .. ws,
+		(hl.dsp.window.move({ workspace = tostring(ws), follow = false, release = false }))
+	)
 end
 
 -- Universal Copy/Paste (CTRL+SHIFT+C / CTRL+SHIFT+V)
